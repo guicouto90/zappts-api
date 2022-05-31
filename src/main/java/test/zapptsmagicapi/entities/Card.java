@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -20,9 +19,8 @@ public class Card {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @NotEmpty(message = "Please provide a name")
-  @NotBlank
-  @NotNull
+  @NotEmpty(message = "Please provide a name, cant be empty")
+  @NotNull(message = "Please provide a name, cant be null")
   private String name;
 
   @NotEmpty(message = "Please provide an edition")

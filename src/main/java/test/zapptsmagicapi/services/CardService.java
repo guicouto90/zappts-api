@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import test.zapptsmagicapi.entities.Card;
 import test.zapptsmagicapi.exceptions.ExceptionNotFound;
+import test.zapptsmagicapi.exceptions.LanguageException;
 import test.zapptsmagicapi.repositories.CardRepository;
 
 @Service
@@ -16,7 +17,14 @@ public class CardService {
   @Autowired
   private CardRepository cardRepository;
 
+  public void verifyLanguage(String language) {
+    if(!language.equals("portuguese") && !language.equals("english") && !language.equals("japanese")) {
+      throw new LanguageException("Language field must be filled with portuguese, english or japanese");
+    }
+  }
+
   public Card addCard(Card card) {
+    this.verifyLanguage(card.getLanguage());
     return this.cardRepository.save(card);
   }
 
