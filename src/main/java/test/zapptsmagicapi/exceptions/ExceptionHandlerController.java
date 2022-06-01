@@ -57,7 +57,7 @@ public class ExceptionHandlerController {
   public ResponseEntity<ExceptionResponseDefault> handleLanguageException(LanguageException exception, WebRequest web) {
     ExceptionResponseDefault response =
         new ExceptionResponseDefault(new Date(), exception.getMessage(), web.getDescription(false));
-    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
   }
 
 }

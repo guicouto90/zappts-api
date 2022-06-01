@@ -10,8 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 @Entity
 public class User {
@@ -24,9 +26,16 @@ public class User {
   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Deck> decks;
 
+  @NotEmpty(message = "Please provide a name, cant be empty")
   private String name;
+  
+  @NotEmpty(message = "Please provide a username, cant be empty")
   private String userName;
 
+  public User() {
+    super();
+    this.decks = new ArrayList<>();
+  }
 
   public User(Integer id, String name, String userName) {
     this.id = id;
@@ -43,8 +52,8 @@ public class User {
     return this.decks;
   }
 
-  public void setDecks(List<Deck> decks) {
-    this.decks = decks;
+  public void addDecks(Deck deck) {
+    this.decks.add(deck);
   }
 
   public String getName() {
