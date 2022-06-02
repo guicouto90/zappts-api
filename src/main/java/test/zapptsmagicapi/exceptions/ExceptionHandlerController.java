@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -26,6 +29,13 @@ public class ExceptionHandlerController {
   } */
 
   @ExceptionHandler(NoSuchElementException.class)
+  public ResponseEntity<ExceptionResponseDefault> handleNoSuchElementFound(ExceptionNotFound exception, WebRequest web) {
+    ExceptionResponseDefault response =
+        new ExceptionResponseDefault(new Date(), exception.getMessage(), web.getDescription(false));
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+  }
+
+  @ExceptionHandler(ExceptionNotFound.class)
   public ResponseEntity<ExceptionResponseDefault> handleNotFound(ExceptionNotFound exception, WebRequest web) {
     ExceptionResponseDefault response =
         new ExceptionResponseDefault(new Date(), exception.getMessage(), web.getDescription(false));
@@ -53,8 +63,20 @@ public class ExceptionHandlerController {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
   }
 
-  @ExceptionHandler(LanguageException.class)
-  public ResponseEntity<ExceptionResponseDefault> handleLanguageException(LanguageException exception, WebRequest web) {
+  //REF: https://www.baeldung.com/global-error-handler-in-a-spring-rest-api
+  @ExceptionHandler(ConstraintViolationException.class)
+  public ResponseEntity<?> handleConstraintViolationException(ConstraintViolationException exception, WebRequest web) {
+    Map<String, String> errorList = new HashMap<>();
+    for(ConstraintViolation<?> violation : exception.getConstraintViolations()) {
+      errorList.put(violation.getPropertyPath().toString(), violation.getMessage());
+    }
+    ExceptionResponseDefault response =
+        new ExceptionResponseDefault(new Date(), errorList, web.getDescription(false));
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+  }
+
+  @ExceptionHandler(ExceptionBadRequest.class)
+  public ResponseEntity<ExceptionResponseDefault> handleLanguageException(ExceptionBadRequest exception, WebRequest web) {
     ExceptionResponseDefault response =
         new ExceptionResponseDefault(new Date(), exception.getMessage(), web.getDescription(false));
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);

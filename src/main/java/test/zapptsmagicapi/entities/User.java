@@ -22,15 +22,15 @@ public class User {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @JsonManagedReference
-  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Deck> decks;
-
   @NotEmpty(message = "Please provide a name, cant be empty")
   private String name;
   
   @NotEmpty(message = "Please provide a username, cant be empty")
   private String userName;
+
+  @JsonManagedReference
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Deck> decks;
 
   public User() {
     super();
@@ -39,9 +39,9 @@ public class User {
 
   public User(Integer id, String name, String userName) {
     this.id = id;
-    this.decks = new ArrayList<>();
     this.name = name;
     this.userName = userName;
+    this.decks = new ArrayList<>();
   }
 
   public Integer getId() {

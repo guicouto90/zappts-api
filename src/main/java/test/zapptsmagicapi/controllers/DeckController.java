@@ -1,4 +1,4 @@
-package test.zapptsmagicapi.entities;
+package test.zapptsmagicapi.controllers;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import test.zapptsmagicapi.entities.Deck;
 import test.zapptsmagicapi.services.DeckService;
 
 @RestController

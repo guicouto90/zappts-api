@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import test.zapptsmagicapi.entities.Card;
 import test.zapptsmagicapi.entities.Deck;
 import test.zapptsmagicapi.entities.User;
 import test.zapptsmagicapi.services.UserService;
@@ -48,6 +50,18 @@ public class UserController {
   public ResponseEntity<User> insertCardInDeck(@PathVariable Integer userId, @PathVariable String deckName, @PathVariable Integer cardId) {
     User user = this.userService.addCardInDeck(userId, deckName, cardId);
     return new ResponseEntity<>(user, HttpStatus.CREATED);
+  }
+
+  @PutMapping("/{userId}/decks/{deckName}/cards/{cardId}")
+  public ResponseEntity<User> updateCardInDeck(@PathVariable Integer userId, @PathVariable String deckName, @PathVariable Integer cardId, @RequestBody Card card) {
+    User user = this.userService.editCardInDeck(userId, deckName, cardId, card);
+    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+  }
+
+  @DeleteMapping("/{userId}/decks/{deckName}/cards/{cardId}")
+  public ResponseEntity<?> deleteCardInDeck(@PathVariable Integer userId, @PathVariable String deckName, @PathVariable Integer cardId) {
+    User user = this.userService.eraseCardInDeck(userId, deckName, cardId);
+    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
   }
 
   @DeleteMapping("/{userId}")

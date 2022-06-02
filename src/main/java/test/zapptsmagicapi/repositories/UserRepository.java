@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import test.zapptsmagicapi.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-  List<User> findByUserName(String userName);
+  User findByUserName(String userName);
 }

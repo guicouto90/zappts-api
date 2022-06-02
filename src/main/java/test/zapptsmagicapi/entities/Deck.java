@@ -24,12 +24,12 @@ public class Deck {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
+  @NotEmpty(message = "Please, provide a deckName")
+  private String deckName;
+
   @JsonManagedReference
   @OneToMany(mappedBy = "deck", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Card> cards;
-
-  @NotEmpty(message = "Please, provide a deckName")
-  private String deckName;
 
   @JsonBackReference
   @ManyToOne
@@ -58,6 +58,10 @@ public class Deck {
 
   public void addCards(Card card) {
     this.cards.add(card);
+  }
+
+  public void removeCard(int index) {
+    this.cards.remove(index);
   }
 
   public String getDeckName() {
