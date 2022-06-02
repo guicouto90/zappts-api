@@ -11,7 +11,7 @@
 	<groupId>test</groupId>
 	<artifactId>zappts-magic-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>zappts-magic-api</name>
 	<description>Test for zappts company</description>
 	<properties>
