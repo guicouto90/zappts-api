@@ -1,15 +1,31 @@
 package test.zapptsmagicapi.services;
 
+/* import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.Arrays; */
 import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+// import com.google.api.client.http.HttpTransport;
+// import com.google.api.client.json.JsonFactory;
+// import com.google.api.client.json.jackson2.JacksonFactory;
+// import com.google.api.services.translate.Translate;
+// import com.google.api.services.translate.TranslateRequest;
+// import com.google.api.services.translate.TranslateRequestInitializer;
+
 import test.zapptsmagicapi.entities.Card;
 import test.zapptsmagicapi.exceptions.ExceptionNotFound;
+// import test.zapptsmagicapi.exceptions.InternalErrorException;
 import test.zapptsmagicapi.exceptions.LanguageException;
 import test.zapptsmagicapi.repositories.CardRepository;
+
+/* import com.google.api.GoogleAPI;
+import com.google.api.translate.Language;
+import com.google.api.translate.Translate; */ 
 
 @Service
 public class CardService {
@@ -23,8 +39,35 @@ public class CardService {
     }
   }
 
+  /*public String translateCardName(String cardName) {
+    TranslateRequestInitializer translateRequestInitializer = new TranslateRequestInitializer(
+      "Generated key from google console");
+
+    // Set up the HTTP transport and JSON factory
+    HttpTransport httpTransport;
+    try {
+      httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+      JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+
+    // set up translate
+    final Translate translate = new Translate.Builder(httpTransport, jsonFactory, null)
+      .setApplicationName("My Apps").setTranslateRequestInitializer(translateRequestInitializer).build();
+
+    List<String> sourceTextList = Arrays.asList("source Text");
+    // translate
+    System.out.println(translate.translations().list(sourceTextList, "pt").execute());
+    } catch (GeneralSecurityException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    
+    return cardName;
+  } */ 
+
   public Card addCard(Card card) {
     this.verifyLanguage(card.getLanguage());
+    // this.translateCardName(card.getName());
     return this.cardRepository.save(card);
   }
 
