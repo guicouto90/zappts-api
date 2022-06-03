@@ -48,6 +48,8 @@ O teste consiste em construir uma API onde a pessoa usuaria, pode adicionar um o
       "price": "double e tem que ser maior que 1"
     }
 ```
+*Observação: para essa rota especifica, existe um seeder para popular o banco, que cadastra 16 cartas quando a aplicação é inicializada pela primeira vez.
+
 #### GET `/cards` e `/cards/{cardId}`:
 - API permite que seja possivel listar todas os Cards registrados através dp método GET no endpoint `/cards`, e listar um Card especifico com o endpoint `/cards/{cardId}`, passando um cardId de um card já cadastrado.
 
@@ -119,6 +121,7 @@ O teste consiste em construir uma API onde a pessoa usuaria, pode adicionar um o
 - Uma rota para login;
 - Implementação do JWT;
 - "Dockerizar" a aplicação;
+- Traduzir o nome das cartas de ingles para portugues automaticamente.
 
 ### Considerações finais:
 <div align="center">
@@ -127,7 +130,7 @@ O teste consiste em construir uma API onde a pessoa usuaria, pode adicionar um o
     Agradeço muito a oportunidade de estar participando no processo seletivo da Zappts.
 
     Dúvidas ou sugestões me contate por:
-    - Linkedin: <a href="https://www.linkedin.com/in/guicouto90/">
+    - Linkedin: https://www.linkedin.com/in/guicouto90/
     - Email: gui.couto90@yahoo.com.br
     
 </div>

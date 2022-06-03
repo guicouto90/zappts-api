@@ -34,6 +34,12 @@ public class UserController {
     return new ResponseEntity<>(users, HttpStatus.OK);
   }
 
+  @GetMapping("/{userId}")
+  public ResponseEntity<User> getUserById(@PathVariable Integer userId) {
+    User user = this.userService.verifyUserById(userId);
+    return new ResponseEntity<>(user, HttpStatus.OK);
+  }
+
   @PostMapping
   public ResponseEntity<User> insertUser(@Valid @RequestBody User user) {
     User newUser = this.userService.addUser(user);
@@ -44,6 +50,18 @@ public class UserController {
   public ResponseEntity<User> insertDeck(@PathVariable Integer userId, @Valid @RequestBody Deck deck) {
     User user = this.userService.addDeckById(userId, deck);
     return new ResponseEntity<>(user, HttpStatus.CREATED);
+  }
+
+  @DeleteMapping("/{userId}/decks/{deckName}")
+  public ResponseEntity<User> deleteDeck(@PathVariable Integer userId,@PathVariable String deckName) {
+    User user = this.userService.eraseDeck(userId, deckName);
+    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+  }
+
+  @PutMapping("/{userId}/decks/{deckName}")
+  public ResponseEntity<User> updateDeck(@PathVariable Integer userId, @PathVariable String deckName, @Valid @RequestBody Deck deck) {
+    User user = this.userService.editDeck(userId, deckName, deck);
+    return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
   }
 
   @PostMapping("/{userId}/decks/{deckName}/cards/{cardId}")

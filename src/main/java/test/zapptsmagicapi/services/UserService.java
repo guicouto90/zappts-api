@@ -104,12 +104,10 @@ public class UserService {
     }
   }
 
-  public String verifyIfCardHasRelation(Integer cardId) {
+  public void verifyIfCardHasRelation(Integer cardId) {
     Card card = this.cardRepository.findById(cardId).get();
     if(card.getDeck() != null) {
       throw new ExceptionBadRequest("You are not allowed to add this card in your deck");
-    } else {
-      return "";
     }
   }
 
@@ -145,7 +143,7 @@ public class UserService {
     return user;
   }
 
-  // add a card that already exists in a deck;
+  // add a card that already is registered on the system, in a deck;
   public User addCardInDeck(Integer userId, String deckName, Integer cardId) {
     User user = this.verifyUserById(userId);
     Deck deck = this.verifyDeck(user, deckName);
@@ -161,7 +159,7 @@ public class UserService {
     return user;
   }
 
-  // edit price in a deck for an user
+  // edit card price in a deck for an user
   public User editCardInDeck(Integer userId, String deckName, Integer cardId, Card bodyCard) {
     User user = this.verifyUserById(userId);
     Deck deck = this.verifyDeck(user, deckName);
@@ -186,4 +184,34 @@ public class UserService {
     
     return user;
   }
+
+  // erase an especific deck
+  public User eraseDeck(Integer userId, String deckName) {
+    User user = this.verifyUserById(userId);
+    Deck deck = this.verifyDeck(user, deckName);
+
+    int index = user.getDecks().indexOf(deck);
+
+    if(index == -1) {
+      throw new ExceptionNotFound("Deck not found");
+    }
+    
+    user.removeDeck(index);
+    this.userRepository.save(user);
+
+    return user;
+  }
+
+  // edit the name of an especific deck
+  public User editDeck(Integer userId, String deckName, Deck deck) {
+    User user = this.verifyUserById(userId);
+    this.verifyDeckName(user, deck.getDeckName());
+    Deck editedDeck = this.verifyDeck(user, deckName);
+
+    editedDeck.setDeckName(deck.getDeckName());
+    this.deckRepository.save(editedDeck);
+
+    return user;
+  }
+
 }

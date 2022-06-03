@@ -56,6 +56,10 @@ public class User {
     this.decks.add(deck);
   }
 
+  public void removeDeck(int index) {
+    this.decks.remove(index);
+  }
+
   public String getName() {
     return this.name;
   }
