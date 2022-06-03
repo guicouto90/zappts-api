@@ -1,6 +1,8 @@
 package test.zapptsmagicapi.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -83,8 +85,10 @@ public class UserController {
   }
 
   @DeleteMapping("/{userId}")
-  public ResponseEntity<String> deleteUserById(@PathVariable Integer userId) {
+  public ResponseEntity<?> deleteUserById(@PathVariable Integer userId) {
     this.userService.removeUser(userId);
-    return new ResponseEntity<String>("User with id " + String.valueOf(userId) + " deleted", HttpStatus.ACCEPTED);
+    Map<String, String> message = new HashMap<>();
+    message.put("message", "User with id " + String.valueOf(userId)  + " deleted");
+    return new ResponseEntity<>(message, HttpStatus.ACCEPTED);
   }
 }

@@ -48,6 +48,12 @@ public class Deck {
     this.cards = new ArrayList<>();
   }
 
+  public Deck(Integer id, String deckName) {
+    this.id = id;
+    this.deckName = deckName;
+    this.cards = new ArrayList<>();
+  }
+
   public Integer getId() {
     return this.id;
   }

@@ -1,6 +1,8 @@
 package test.zapptsmagicapi.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -44,8 +46,10 @@ public class CardController {
   }
 
   @DeleteMapping("/{cardId}")
-  public ResponseEntity<String> deleteCardById(@PathVariable Integer cardId) {
+  public ResponseEntity<?> deleteCardById(@PathVariable Integer cardId) {
     this.cardService.removeCard(cardId);
-    return new ResponseEntity<String>("Card with id " + String.valueOf(cardId)  + " deleted",HttpStatus.ACCEPTED);
+    Map<String, String> message = new HashMap<>();
+    message.put("message", "Card with id " + String.valueOf(cardId)  + " deleted");
+    return new ResponseEntity<>(message, HttpStatus.ACCEPTED);
   }
 }
