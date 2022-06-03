@@ -121,16 +121,16 @@ O teste consiste em construir uma API onde a pessoa usuaria, pode adicionar um o
 - Uma rota para login;
 - Implementação do JWT;
 - "Dockerizar" a aplicação;
-- Traduzir o nome das cartas de ingles para portugues automaticamente.
+- Traduzir o nome das cartas de ingles para portugues automaticamente;
+- Feature para adicionar quantidade de cartas que o usuario possui com determinada caracteristica.
 
 ### Considerações finais:
 <div align="center">
 
-    Ainda preciso me aprimorar muito em Java, principalmente na parte de teste, é uma linguagem relativamente nova para mim.
-    Agradeço muito a oportunidade de estar participando no processo seletivo da Zappts.
+  Muito obrigado Zappts pela oportunidade de participar do processo seletivo.
 
-    Dúvidas ou sugestões me contate por:
-    - Linkedin: https://www.linkedin.com/in/guicouto90/
-    - Email: gui.couto90@yahoo.com.br
+  Dúvidas ou sugestões me contate por:
+  - Linkedin: https://www.linkedin.com/in/guicouto90/
+  - Email: gui.couto90@yahoo.com.br
     
 </div>
